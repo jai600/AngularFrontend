@@ -1,0 +1,107 @@
+<div class="container mt-5">
+    <div class="row">
+ 
+      <div class="col-lg-8 offset-lg-2">
+ 
+       <div class="card">
+ 
+         <div class="card-body text-center">
+ 
+               <h3>Tarjetas de Credito</h3>
+         </div>
+       </div>
+      </div>
+    </div>
+ 
+ 
+    <div class="row mt-4">
+ 
+      <div class="col-lg-6">
+ 
+       <div class="card">
+ 
+         <div class="card-body">
+ 
+           <div class="titulo text-center">
+              {{ accion | uppercase}} TARJETA CREDITO
+ 
+           </div>
+            <form [formGroup] = "form" (ngSubmit) = "agregarTarjeta()">
+
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" [class.green-icon] = "this.form.get('NumeroTarjeta')?.valid" 
+                        [class.red-icon] = "this.form.get('NumeroTarjeta')?.invalid && this.form.get('NumeroTarjeta')?.touched" id="addon-wrapping">@</span>
+                    <input formControlName="NumeroTarjeta" type="text" class="form-control"  maxlength="16" placeholder="Numero Tarjeta" aria-label="numero" id="numero" aria-describedby="addon-wrapping">
+                  </div>
+       
+                  <div class="input-group flex-nowrap">
+                   <span class="input-group-text" [class.green-icon] = "this.form.get('Titular')?.valid"  [class.red-icon] = "this.form.get('Titular')?.invalid && this.form.get('Titular')?.touched" id="addon-wrapping">@</span>
+                   <input formControlName="Titular" type="text" class="form-control" placeholder="Titular" aria-label="Titular" id="Titular" aria-describedby="addon-wrapping">
+                 </div>
+                 <div class="row">
+                   <div class="col-lg-7">
+       
+                       <div class="input-group flex-nowrap">
+                           <span class="input-group-text" [class.green-icon] = "this.form.get('FechaExpiracion')?.valid" 
+                           [class.red-icon] = "this.form.get('FechaExpiracion')?.invalid  && this.form.get('FechaExpiracion')?.touched"   id="addon-wrapping">@</span>
+                           <input formControlName="FechaExpiracion" type="text" class="form-control" maxlength="5" placeholder="MM/YY" aria-label="fecha" id="Fecha" aria-describedby="addon-wrapping">
+                         </div>
+                   </div>
+       
+                   <div class="col-lg-5">
+       
+                       <div class="input-group flex-nowrap">
+                           <span class="input-group-text" [class.green-icon] = "this.form.get('cvv')?.valid" 
+                           [class.red-icon] ="this.form.get('cvv')?.invalid && this.form.get('cvv')?.touched" id="addon-wrapping">@</span>
+                           <input formControlName = "cvv" type="password" maxlength="3" class="form-control" placeholder="CVV" aria-label="CVV" id="CVV" aria-describedby="addon-wrapping">
+                         </div>
+                   </div>
+       
+                 </div>
+       
+                 
+                 <div class="d-grid mt-5 gap-2">
+                  
+                   <button [disabled]="this.form.invalid" type="submit" class="btn btn-success">GUARDAR</button>
+                 </div>
+            </form>
+          
+          
+         </div>
+       </div>
+      </div>
+ 
+      <div class="col-lg-6">
+ 
+       <div class="card">
+ 
+           <div class="card-body">
+ 
+               <div class="titulo text-center">
+ 
+                 LISTA TARJETAS CREDITO
+               </div>
+ 
+               <table class="table">
+ 
+                 <tbody>
+ 
+                   <tr *ngFor="let tarjeta of listTarjetas">
+ 
+                     <td>{{tarjeta.titular}}</td>
+                     <td>{{tarjeta.numeroTarjeta}}</td>
+                     <td>{{tarjeta.fechaExpiracion}}</td>
+                
+                     <td><button (click) = "editarTarjeta(tarjeta)" class="btn btn-success">EDITAR</button></td>
+                     <td><button (click) = "eliminar(tarjeta.id)" class="btn btn-danger">ELIMINAR</button></td>
+                   </tr>
+                 </tbody>
+               </table>
+           </div>
+       </div>
+      </div>
+ 
+    </div>
+ 
+   
+ </div>
